@@ -16,3 +16,11 @@ export const GET_USER_BY_EMAIL = `
   FROM users 
   WHERE email = $1;
 `;
+
+// get user profile
+
+export const GET_USER_BY_ID = `
+SELECT id as "_id", email, first_name, last_name, phone, created_at
+FROM users
+WHERE id =$1;
+`

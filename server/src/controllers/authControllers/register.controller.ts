@@ -15,7 +15,7 @@ export const registerController = async (
     }
 
     // call the service layer
-    const data = await authService.register({
+    const { user, token } = await authService.register({
       email,
       password_plain: password,
       first_name,
@@ -24,7 +24,7 @@ export const registerController = async (
     });
 
     // send the token back to the client
-    res.status(201).json({ message: "User registerd successfully", ...data });
+    res.status(201).json({ message: "User registerd successfully", user });
   } catch (error) {
     res.status(400).json({ error: "Register failed" });
     console.log(error);

@@ -59,7 +59,6 @@ export const login = async (credentials: {
   // check the password
   const isPasswordValid = bcrypt.compare(password_plain, user.password_hash);
 
-
   if (!isPasswordValid) {
     throw new Error("Invalid email or password");
   }
@@ -73,4 +72,13 @@ export const login = async (credentials: {
     user: cleanUser,
     token,
   };
+};
+
+export const getCurrentUser = async (userId: string) => {
+  const result = await db.query(authQueries.GET_USER_BY_ID, [userId]);
+
+  if (result.rows.length === 0) {
+    throw new Error("User session invalid or user no longer exists");
+  }
+  return result.rows[0];
 };

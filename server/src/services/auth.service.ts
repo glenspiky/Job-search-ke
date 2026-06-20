@@ -3,6 +3,7 @@ import * as db from "../utils/db";
 import * as authQueries from "../queries/auth.queries";
 import { generateToken } from "../utils/jwt";
 
+// Register a new user and auto-provision their profile
 export const register = async (userData: {
   email: string;
   password_plain: string;
@@ -22,7 +23,7 @@ export const register = async (userData: {
   const saltRounds = 10;
   const paswordHash = await bcrypt.hash(password_plain, saltRounds);
 
-  //save to postgres
+  // save to postgres users table
   const result = await db.query(authQueries.CREATE_USER, [
     email,
     paswordHash,
@@ -33,6 +34,13 @@ export const register = async (userData: {
 
   const newUser = result.rows[0];
 
+  // AUTOMATICALLY PROVISION BLANK PROFILE RECORD HERE
+  await db.query(
+    `INSERT INTO profiles (user_id, years_experience, remote_only) 
+     VALUES ($1, 0, false)`,
+    [newUser.id],
+  );
+
   // generate token
   const token = generateToken(newUser.id);
 
@@ -42,7 +50,7 @@ export const register = async (userData: {
   };
 };
 
-// login a user
+// Login an existing user
 export const login = async (credentials: {
   email: string;
   password_plain: string;
@@ -56,17 +64,19 @@ export const login = async (credentials: {
   }
   const user = result.rows[0];
 
-  // check the password
-  const isPasswordValid = bcrypt.compare(password_plain, user.password_hash);
+  const isPasswordValid = await bcrypt.compare(
+    password_plain,
+    user.password_hash,
+  );
 
   if (!isPasswordValid) {
     throw new Error("Invalid email or password");
   }
+
   // generate new token
   const token = generateToken(user.id);
 
-  // Strip away the password hash before sending the user details back to the controller
-  const { pasword_hash, ...cleanUser } = user;
+  const { password_hash, ...cleanUser } = user;
 
   return {
     user: cleanUser,
@@ -74,6 +84,7 @@ export const login = async (credentials: {
   };
 };
 
+// Get profile details of the logged in user via token middleware context
 export const getCurrentUser = async (userId: string) => {
   const result = await db.query(authQueries.GET_USER_BY_ID, [userId]);
 

@@ -5,7 +5,6 @@ export const updateProfileController = async (req: Request, res: Response) => {
   try {
     const userId = req.user?.id;
     const updateData = req.body;
-    const { profileId } = req.params;
 
     if (!userId) {
       return res.status(401).json({ message: "Unauthorized" });
@@ -14,7 +13,6 @@ export const updateProfileController = async (req: Request, res: Response) => {
     const updateProfile = await userService.updateUserProfile(
       userId,
       updateData,
-      profileId,
     );
 
     res.status(200).json({

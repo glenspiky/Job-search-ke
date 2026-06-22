@@ -25,8 +25,11 @@ export const registerController = async (
 
     // send the token back to the client
     res.status(201).json({ message: "User registerd successfully", user });
-  } catch (error) {
-    res.status(400).json({ error: "Register failed" });
-    console.log(error);
+  } catch (error: any) {
+    console.error("Registration Error:", error);
+    res.status(400).json({
+      error: "Register failed",
+      details: error.message || error, // This will show you the real error in the browser network tab
+    });
   }
 };

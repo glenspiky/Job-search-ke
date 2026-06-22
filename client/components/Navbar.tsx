@@ -22,14 +22,14 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Jobs", href: "/jobs" },
-    { name: "Companies", href: "/companies" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "Create", href: "/create" },
     { name: "About", href: "/about" },
   ];
 
   return (
     <div className="fixed top-0 left-0 w-full bg-transparent text-white   z-50">
-      <nav className="flex justify-between p-4 items-center max-w-9xl mx-auto w-full">
+      <nav className="flex justify-between p-4 items-center max-w-7xl mx-auto w-full">
         {/* LOGO AREA */}
         <div className="text-3xl md:text-4xl">
           <TechLogo />
@@ -46,7 +46,7 @@ export default function Navbar() {
                 asChild
                 className={`text-xl cursor-pointer rounded-none transition-all pb-1 h-auto border-b-2 ${
                   isActive
-                    ? "  hover:no-underline text-white"
+                    ? " no-underline hover:no-underline"
                     : "border-transparent text-zinc-400 hover:text-white"
                 }`}
               >
@@ -56,7 +56,7 @@ export default function Navbar() {
           })}
 
           <Button className="text-lg bg-emerald-500 hover:bg-emerald-600 text-black rounded-sm px-4 py-2 h-9 cursor-pointer ml-4">
-            Sign In
+            Login
           </Button>
         </div>
 

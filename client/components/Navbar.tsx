@@ -55,8 +55,8 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-transparent text-white z-50">
-      <nav className="flex justify-between items-center p-4 max-w-7xl mx-auto w-full">
+    <div className="fixed top-0 left-0 w-full bg-black text-white z-50">
+      <nav className="flex justify-between items-center pt-1 max-w-7xl mx-auto w-full border-b-1 border-b-zinc-800">
         {/* Logo */}
         <div className="text-3xl md:text-4xl">
           <TechLogo />
@@ -74,7 +74,7 @@ export default function Navbar() {
                   key={link.href}
                   variant="link"
                   asChild
-                  className={`text-xl cursor-pointer rounded-none transition-all pb-1 h-auto border-b-2 ${
+                  className={`text-md cursor-pointer rounded-none transition-all pb-1 h-auto border-b-2 ${
                     isActive
                       ? "border-emerald-500 text-white"
                       : "border-transparent text-zinc-400 hover:text-white"

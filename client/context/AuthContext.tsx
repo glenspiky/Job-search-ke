@@ -2,11 +2,11 @@
 import { User } from "@/lib/types";
 import { createContext, useContext, useEffect, useState } from "react";
 
-interface AuthContextType {
-  User: User | null;
+export interface AuthContextType {
+  user: User | null;
   loading: boolean;
   refetchUser: () => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,6 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       const data = await res.json();
+      console.log(data);
 
       setUser(data.user);
     } catch (err) {

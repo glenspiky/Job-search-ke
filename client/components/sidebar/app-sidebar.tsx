@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sidebar";
 import DashboardSidebarContent from "./DashboardSidebarContent";
 import TechLogo from "../logo";
+import DashboardSidebarFooter from "./sidebar-footer";
 
 export function AppSidebar({
   className,
@@ -26,7 +27,9 @@ export function AppSidebar({
         <SidebarContent>
           <DashboardSidebarContent />
         </SidebarContent>
-        <SidebarFooter />
+        <SidebarFooter>
+          <DashboardSidebarFooter />
+        </SidebarFooter>
       </Sidebar>
     </div>
   );

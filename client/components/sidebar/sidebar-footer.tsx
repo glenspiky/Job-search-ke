@@ -1,3 +1,4 @@
+"use client";
 import { ChevronsUpDown, User2 } from "lucide-react";
 import {
   SidebarFooter,
@@ -21,11 +22,12 @@ export default function DashboardSidebarFooter() {
   const { user, logout } = useAuth();
   const { state, isMobile } = useSidebar();
   const isCollapsed = state === "collapsed" && !isMobile;
+  console.log("isMobile:", isMobile);
 
   return (
     <div>
       <SidebarFooter>
-        <SidebarMenu>
+        <SidebarMenu className="relative">
           <SidebarMenuItem
             className={
               state === "collapsed" && !isMobile
@@ -58,16 +60,14 @@ export default function DashboardSidebarFooter() {
                   )}
                 </SidebarMenuButton>
               </DropdownMenuTrigger>{" "}
-              <DropdownMenuPortal>
-                <DropdownMenuContent
-                  side="right"
-                  align="end"
-                  sideOffset={8}
-                  className="w-76 rounded-lg"
-                >
-                  <SidebarDropDown logout={logout} user={user} />
-                </DropdownMenuContent>
-              </DropdownMenuPortal>
+              <DropdownMenuContent
+                side={`${isMobile ? "top" : "right"}`}
+                align="end"
+                collisionPadding={12}
+                className={`${isMobile ? "absolute right-2 bottom-0" : "w-full min-w-65 max-w-[85vw]"}`}
+              >
+                <SidebarDropDown logout={logout} user={user} />
+              </DropdownMenuContent>{" "}
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>

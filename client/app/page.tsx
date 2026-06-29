@@ -49,11 +49,12 @@ export default function Home() {
         className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]"
       />
 
+
       {/* Content */}
       <motion.div
         variants={container}
         initial="hidden"
-        animate="show"
+       animate="show"
         className="relative mx-auto flex min-h-screen max-w-7xl items-center px-6 lg:px-8"
       >
         <div className="max-w-3xl">

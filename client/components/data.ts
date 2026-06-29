@@ -63,7 +63,7 @@ export const profileNavigation: SidebarItem[] = [
   {
     name: "My Profile",
     icon: User,
-    href: "/dashboard/profile",
+    href: "/dashboard/myprofile",
   },
   {
     name: "Resume",

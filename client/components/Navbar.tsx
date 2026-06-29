@@ -74,11 +74,10 @@ export default function Navbar() {
                   key={link.href}
                   variant="link"
                   asChild
-                  className={`text-md cursor-pointer rounded-none transition-all pb-1 h-auto border-b-2 ${
-                    isActive
+                  className={`text-md cursor-pointer rounded-none transition-all pb-1 h-auto border-b-2 ${isActive
                       ? "border-emerald-500 text-white"
                       : "border-transparent text-zinc-400 hover:text-white"
-                  }`}
+                    }`}
                 >
                   <Link href={link.href}>{link.name}</Link>
                 </Button>
@@ -186,11 +185,10 @@ export default function Navbar() {
                           key={link.href}
                           href={link.href}
                           onClick={() => setIsOpen(false)}
-                          className={`text-2xl ml-5 font-medium transition-colors ${
-                            isActive
+                          className={`text-2xl ml-5 font-medium transition-colors ${isActive
                               ? "text-emerald-400"
                               : "text-zinc-400 hover:text-white"
-                          }`}
+                            }`}
                         >
                           {link.name}
                         </Link>

@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { sidebarNavigation, profileNavigation } from "../data";
 import {
@@ -16,6 +17,7 @@ export default function DashboardSidebarContent() {
   const pathname = usePathname();
   const { state, isMobile } = useSidebar();
   const isCollapsed = state === "collapsed" && !isMobile;
+
   return (
     <div>
       <SidebarGroup>
@@ -41,11 +43,10 @@ export default function DashboardSidebarContent() {
                   >
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
-                        isActive
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${isActive
                           ? "bg-emerald-500 text-black"
                           : "text-zinc-400 hover:bg-emerald-800 hover:text-white"
-                      }`}
+                        }`}
                     >
                       <item.icon />
                       <span>{item.name}</span>
@@ -89,11 +90,10 @@ export default function DashboardSidebarContent() {
                   >
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
-                        isActive
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${isActive
                           ? "bg-emerald-500 text-black"
                           : "text-zinc-400 hover:bg-emerald-800 hover:text-white"
-                      }`}
+                        }`}
                     >
                       <item.icon />
                       <span>{item.name}</span>

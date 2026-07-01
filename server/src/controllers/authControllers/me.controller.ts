@@ -10,7 +10,6 @@ export const meController = async (req: Request, res: Response) => {
     }
     // get data from d
     const user = await authService.getCurrentUser(userId);
-
     res.status(200).json({
       success: true,
       user,

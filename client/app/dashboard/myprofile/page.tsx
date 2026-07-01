@@ -1,5 +1,6 @@
 "use client";
 
+import { ProfileDetails } from "@/components/ProfileDetails";
 import ProfileUpdateCard from "@/components/ProfileUpdateCard";
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/lib/types";
@@ -29,7 +30,7 @@ const MyProfile = () => {
           console.log("Erro fetchng userProfile");
         }
         const data = await response.json();
-        setProfile(data);
+        setProfile(data.data);
       } catch (error) {
         console.error("Failed to fetch user:", error);
       }
@@ -39,14 +40,21 @@ const MyProfile = () => {
   }, [userId]);
   return (
     <div className="relative w-full">
-      <div className="h-52 w-full rounded-2xl bg-green-700 p-6 text-white">
+      <div className="h-30 md:w-full rounded-2xl bg-green-700 p-3 md:p-6  text-white md:h-48">
         <h1 className="text-3xl font-bold">Welcome</h1>
         <span>{user?.first_name}</span>
       </div>
 
       {profile && (
-        <div className="absolute left-1/2 top-40 w-full max-w-4xl -translate-x-1/2 px-4">
-          <ProfileUpdateCard profile={profile} userId={userId} />
+        <div className="absolute left-1/2 top-18 md:top-40 md:w-full w-screen  -translate-x-1/2 px-4 flex flex-col md:flex-row gap-6">
+          <div className="w-full">
+            {" "}
+            <ProfileUpdateCard profile={profile} userId={userId} />
+          </div>
+          <div className="w-full">
+            {" "}
+            <ProfileDetails profile={profile} />
+          </div>
         </div>
       )}
     </div>

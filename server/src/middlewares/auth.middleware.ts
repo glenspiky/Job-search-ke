@@ -21,9 +21,12 @@ export const protect = async (
 
     // pass the id
     req.user = { id: decoded.id };
+    // console.log("Cookies:", req.cookies);
+    // console.log("Token:", req.cookies.token);
+    console.log("success");
     next();
   } catch (error) {
+    console.error("JWT Error:", error);
     res.status(401).json({ error: "Unauthorized" });
-    console.log();
   }
 };

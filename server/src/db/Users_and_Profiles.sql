@@ -21,8 +21,8 @@ CREATE TABLE profiles (
   user_id UUID UNIQUE NOT NULL,
   
   -- Professional Info
-  current_title VARCHAR(255), -- Fixed the typo!
-  bio TEXT, -- Crucial for developer profiles
+  current_title VARCHAR(255), 
+  bio TEXT,
   years_experience INTEGER DEFAULT 0,
   skills TEXT[], -- PostgreSQL array to easily store arrays like ['React', 'TypeScript', 'Node.js']
   
@@ -30,7 +30,6 @@ CREATE TABLE profiles (
   city VARCHAR(100),
   country VARCHAR(100),
   
-  -- Developer Specific Socials
   linkedin_url TEXT,
   github_url TEXT,
   portfolio_url TEXT, -- Fixed typo from 'portifolio_url'

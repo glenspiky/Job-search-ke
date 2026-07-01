@@ -13,10 +13,6 @@ declare global {
 // user profile
 export type UserProfile = {
   id?: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
   createdAt?: string;
   updatedAt?: string;
   currentTitle?: string | null;

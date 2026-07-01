@@ -6,9 +6,15 @@ export const updateProfileController = async (req: Request, res: Response) => {
     const userId = req.user?.id;
     const updateData = req.body;
 
-    if (!userId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+  if (
+  !userId ||
+  userId === "null" ||
+  userId === "undefined"
+) {
+  return res.status(401).json({
+    message: "Unauthorized",
+  });
+}
 
     const updateProfile = await userService.updateUserProfile(
       userId,

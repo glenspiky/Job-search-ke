@@ -31,12 +31,19 @@ export const updateUserProfile = async (
   // 2. Map incoming camelCase properties to database snake_case columns
   const columnMap: Record<string, string> = {
     currentTitle: "current_title",
+    bio: "bio",
     yearsExperience: "years_experience",
+    skills: "skills",
+    city: "city",
+    country: "country",
     linkedinUrl: "linkedin_url",
     githubUrl: "github_url",
     portfolioUrl: "portfolio_url",
+    twitterUrl: "twitter_url",
+    leetcodeUrl: "leetcode_url",
     expectedSalary: "expected_salary",
     remoteOnly: "remote_only",
+    jobSearchStatus: "job_search_status",
   };
 
   // Loop over payload entries

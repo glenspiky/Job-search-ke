@@ -17,14 +17,19 @@ export default function ProfileUpdateCard({ profile, userId }: Props) {
     resolver: zodResolver(UserProfileSchema),
     defaultValues: {
       currentTitle: profile.currentTitle ?? "",
+      bio: profile.bio ?? "",
       yearsExperience: profile.yearsExperience ?? undefined,
+      skills: profile.skills ?? [],
       city: profile.city ?? "",
       country: profile.country ?? "",
       linkedinUrl: profile.linkedinUrl ?? "",
       githubUrl: profile.githubUrl ?? "",
       portfolioUrl: profile.portfolioUrl ?? "",
+      twitterUrl: profile.twitterUrl ?? "",
+      leetcodeUrl: profile.leetcodeUrl ?? "",
       expectedSalary: profile.expectedSalary ?? undefined,
       remoteOnly: profile.remoteOnly ?? false,
+      jobSearchStatus: profile.jobSearchStatus ?? "OPEN_TO_WORK",
     },
   });
   const onSubmit = async (data: UserProfileData) => {
@@ -117,6 +122,22 @@ export default function ProfileUpdateCard({ profile, userId }: Props) {
           label="Portfolio"
           value={form.watch("portfolioUrl") || profile.portfolioUrl}
           placeholder="https://myportfolio.com"
+          control={form.control}
+          onSave={saveField}
+        />
+        <EditableField
+          name="twitterUrl"
+          label="Twitter"
+          value={form.watch("twitterUrl") || profile.twitterUrl}
+          placeholder="https://twitter.com/..."
+          control={form.control}
+          onSave={saveField}
+        />
+        <EditableField
+          name="leetcodeUrl"
+          label="LeetCode"
+          value={form.watch("leetcodeUrl") || profile.leetcodeUrl}
+          placeholder="https://leetcode.com/..."
           control={form.control}
           onSave={saveField}
         />

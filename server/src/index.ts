@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import UserRouter from "./routes/users";
 import JobsRouter from "./routes/jobs";
 import ApplicationsRouter from "./routes/applications";
+import CompaniesRouter from "./routes/companies";
 import cors from "cors";
 
 const app = express();
@@ -36,6 +37,7 @@ app.use("/api/auth", AuthRouter);
 app.use("/api/users", UserRouter);
 app.use("/api/jobs", JobsRouter);
 app.use("/api/applications", ApplicationsRouter);
+app.use("/api/companies", CompaniesRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

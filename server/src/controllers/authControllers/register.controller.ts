@@ -23,6 +23,14 @@ export const registerController = async (
       phone,
     });
 
+    // set token in cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     // send the token back to the client
     res.status(201).json({ message: "User registerd successfully", user });
   } catch (error: any) {

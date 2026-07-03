@@ -29,7 +29,6 @@ export default function ProfileUpdateCard({ profile, userId }: Props) {
   });
   const onSubmit = async (data: UserProfileData) => {
     try {
-      console.log(userId);
       const response = await fetch(
         `http://localhost:5000/api/users/update/${userId}`,
         {

@@ -17,6 +17,5 @@ export const getProfile = async (req: Request, res: Response) => {
     return res.status(200).json({ success: true, data: userProfile });
   } catch (err) {
     res.status(400).json({ error: "Something went wrong" });
-    console.log(err);
   }
 };

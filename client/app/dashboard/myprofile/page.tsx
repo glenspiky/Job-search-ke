@@ -13,10 +13,9 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (!userId) {
-      console.log("Invalid userId");
       return;
     }
-    if (userId === "null") return console.log("Invalid user Id");
+    if (userId === "null") return;
 
     const getUser = async () => {
       try {
@@ -27,12 +26,12 @@ const MyProfile = () => {
           },
         );
         if (!response.ok) {
-          console.log("Erro fetchng userProfile");
+          // Handle error
         }
         const data = await response.json();
         setProfile(data.data);
       } catch (error) {
-        console.error("Failed to fetch user:", error);
+        // Handle error
       }
     };
 

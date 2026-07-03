@@ -30,7 +30,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(data.user);
     } catch (err) {
-      console.log(err);
       setUser(null);
     } finally {
       setLoading(false);

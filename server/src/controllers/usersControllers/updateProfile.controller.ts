@@ -36,6 +36,5 @@ export const updateProfileController = async (req: Request, res: Response) => {
       return res.status(400).json({ message: error.message });
     }
     res.status(500).json({ error: "Something went wrong" });
-    console.log(error);
   }
 };

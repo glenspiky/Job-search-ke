@@ -22,7 +22,6 @@ export default function DashboardSidebarFooter() {
   const { user, logout } = useAuth();
   const { state, isMobile } = useSidebar();
   const isCollapsed = state === "collapsed" && !isMobile;
-  console.log("isMobile:", isMobile);
 
   return (
     <div>

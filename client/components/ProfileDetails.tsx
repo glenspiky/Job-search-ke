@@ -3,71 +3,142 @@ import {
   BadgeCheck,
   Briefcase,
   BriefcaseBusiness,
-  ChartCandlestick,
-  House,
-  Wallet,
+  MapPin,
+  DollarSign,
+  Link,
+  Globe,
 } from "lucide-react";
 
-export const ProfileDetails = (profile: { profile: UserProfile }) => {
+export const ProfileDetails = ({ profile }: { profile: UserProfile }) => {
   return (
     <div>
       <div className="flex rounded-sm flex-col justify-center p-3 gap-4 bg-card">
-        <h1 className="text-2xl font-bold">Profesional Details</h1>
-        <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl ">
-          <p className="">
-            This are the professional details shown to users in the app.
-          </p>
-          <div className=" items-center justify-center rounded-2xl">
-            <Briefcase className="h-8 w-8 text-primary" />
-          </div>{" "}
-        </div>
-        <div className="">
-          <h1 className="flex mb-2">Expertise In</h1>
-          <div className="grid grid-cols-2 gap-8">
-            <div className="flex border-2 justify-center gap-4 px-4 py-2 rounded-full ">
-              <BriefcaseBusiness className="text-primary" />
-              <p className="">Career</p>
-            </div>{" "}
-            <div className="flex border-2 justify-center gap-4 px-4 py-2 rounded-full ">
-              <Wallet className="text-primary" />
-              <p className="">Money</p>
-            </div>{" "}
-            <div className="flex border-2 justify-center gap-4 px-4 py-2 rounded-full ">
-              <ChartCandlestick className="text-primary" />
-              <p className="">Stock</p>
-            </div>{" "}
-            <div className="flex border-2 justify-center gap-4 px-4 py-2 rounded-full ">
-              <House className="text-primary" />
-              <p className="">Home</p>
+        <h1 className="text-2xl font-bold">Professional Details</h1>
+        
+        <div className="space-y-4">
+          {profile.currentTitle && (
+            <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+              <div className="flex items-center justify-center rounded-2xl">
+                <Briefcase className="h-8 w-8 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Current Title</p>
+                <p className="font-semibold">{profile.currentTitle}</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="space-y-3">
-          <h2 className="text-lg font-semibold">Total Experience</h2>
+          )}
 
-          <div className="flex overflow-hidden rounded-2xl border shadow-sm">
-            <div className="flex flex-1 flex-col justify-center p-3">
-              <h3 className="text-xl font-bold">7 Years</h3>
-              <p className="text-muted-foreground">of total experience</p>
+          {profile.yearsExperience !== null && profile.yearsExperience !== undefined && (
+            <div className="flex overflow-hidden rounded-2xl border shadow-sm">
+              <div className="flex flex-1 flex-col justify-center p-3">
+                <h3 className="text-xl font-bold">{profile.yearsExperience} Years</h3>
+                <p className="text-muted-foreground">of total experience</p>
+              </div>
+              <div className="flex w-20 items-center justify-center bg-primary/5">
+                <BadgeCheck className="h-8 w-8 fill-white text-white" />
+              </div>
             </div>
+          )}
 
-            <div className="flex w-20 items-center justify-center bg-primary/5">
-              <BadgeCheck className="h-8 w-8 fill-white text-white" />
+          {(profile.city || profile.country) && (
+            <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+              <div className="flex items-center justify-center rounded-2xl">
+                <MapPin className="h-8 w-8 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Location</p>
+                <p className="font-semibold">
+                  {profile.city && profile.country
+                    ? `${profile.city}, ${profile.country}`
+                    : profile.city || profile.country}
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="space-y-3 mb-6">
-          <h2 className="text-lg font-semibold">Job Jobs Applied</h2>
+          )}
 
-          <div className="flex overflow-hidden rounded-2xl border shadow-sm">
-            <div className="flex flex-1 flex-col justify-center p-3">
-              <h3 className="text-xl font-bold">8 Jobs</h3>
-              <p className="text-muted-foreground">of total jobs</p>
+          {profile.expectedSalary !== null && profile.expectedSalary !== undefined && (
+            <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+              <div className="flex items-center justify-center rounded-2xl">
+                <DollarSign className="h-8 w-8 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Expected Salary</p>
+                <p className="font-semibold">${profile.expectedSalary.toLocaleString()}</p>
+              </div>
             </div>
+          )}
 
-            <div className="flex w-20 items-center justify-center bg-primary/5">
-              <BriefcaseBusiness className="h-8 w-8 fill-white text-white" />
+          {profile.remoteOnly !== null && profile.remoteOnly !== undefined && (
+            <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+              <div className="flex items-center justify-center rounded-2xl">
+                <BriefcaseBusiness className="h-8 w-8 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Work Preference</p>
+                <p className="font-semibold">{profile.remoteOnly ? "Remote Only" : "Open to Office"}</p>
+              </div>
             </div>
+          )}
+
+          <div className="space-y-3">
+            <h2 className="text-lg font-semibold">Social Links</h2>
+            
+            {profile.linkedinUrl && (
+              <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+                <div className="flex items-center justify-center rounded-2xl">
+                  <Link className="h-8 w-8 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">LinkedIn</p>
+                  <a
+                    href={profile.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-500 hover:underline"
+                  >
+                    View Profile
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {profile.githubUrl && (
+              <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+                <div className="flex items-center justify-center rounded-2xl">
+                  <Link className="h-8 w-8 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">GitHub</p>
+                  <a
+                    href={profile.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-500 hover:underline"
+                  >
+                    View Profile
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {profile.portfolioUrl && (
+              <div className="flex gap-4 border-2 border-zinc-800 p-4 rounded-xl">
+                <div className="flex items-center justify-center rounded-2xl">
+                  <Globe className="h-8 w-8 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">Portfolio</p>
+                  <a
+                    href={profile.portfolioUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-500 hover:underline"
+                  >
+                    View Portfolio
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

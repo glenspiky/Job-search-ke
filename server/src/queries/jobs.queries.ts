@@ -1,28 +1,38 @@
 export const GET_ALL_JOBS = `
 SELECT
-jobs.id,
+  jobs.id,
   jobs.title,
+  companies.name AS company_name,
   jobs.location,
-  companies.name AS company_name
+  jobs.employment_type,
+  jobs.experience_level,
+  jobs.salary_min,
+  jobs.salary_max,
+  jobs.currency,
+  jobs.remote,
+  jobs.posted_at
 FROM jobs
 JOIN companies
-    ON jobs.company_id = companies.id;
-`;
-// src/queries/jobs.queries.ts
+  ON jobs.company_id = companies.id
+ORDER BY jobs.posted_at DESC;`;
 
 export const INSERT_JOB = `
-INSERT INTO jobs (
+INSERT INTO jobs(
   title,
   company_id,
   description,
   location,
+  employment_type,
+  experience_level,
   salary_min,
   salary_max,
+  currency,
   remote,
+  skills,
   application_url,
   posted_at
 )
-VALUES (
+VALUES(
   $1,
   $2,
   $3,
@@ -31,6 +41,10 @@ VALUES (
   $6,
   $7,
   $8,
+  $9,
+  $10,
+  $11,
+  $12,
   NOW()
 )
 RETURNING *;
@@ -42,9 +56,13 @@ SELECT
   jobs.title,
   jobs.description,
   jobs.location,
+  jobs.employment_type,
+  jobs.experience_level,
   jobs.salary_min,
   jobs.salary_max,
+  jobs.currency,
   jobs.remote,
+  jobs.skills,
   jobs.application_url,
   jobs.posted_at,
   jobs.created_at,
@@ -64,14 +82,17 @@ SET
   title = COALESCE($2, title),
   description = COALESCE($3, description),
   location = COALESCE($4, location),
-  salary_min = COALESCE($5, salary_min),
-  salary_max = COALESCE($6, salary_max),
-  remote = COALESCE($7, remote),
-  application_url = COALESCE($8, application_url),
+  employment_type = COALESCE($5, employment_type),
+  experience_level = COALESCE($6, experience_level),
+  salary_min = COALESCE($7, salary_min),
+  salary_max = COALESCE($8, salary_max),
+  currency = COALESCE($9, currency),
+  remote = COALESCE($10, remote),
+  skills = COALESCE($11, skills),
+  application_url = COALESCE($12, application_url),
   updated_at = NOW()
 WHERE id = $1
-RETURNING *;
-`;
+RETURNING *;`;
 
 export const DELETE_JOB = `
 DELETE FROM jobs
@@ -81,7 +102,7 @@ RETURNING *;
 
 export const SEARCH_JOBS = `
 SELECT
-  jobs.id,
+jobs.id,
   jobs.title,
   jobs.description,
   jobs.location,
@@ -99,6 +120,7 @@ WHERE
   ($1::text IS NULL OR jobs.title ILIKE $1)
   AND ($2::text IS NULL OR jobs.location ILIKE $2)
   AND ($3::boolean IS NULL OR jobs.remote = $3)
+  AND ($4::text IS NULL OR jobs.employment_type = $4)
+  AND ($5::text IS NULL OR jobs.experience_level = $5)
 ORDER BY jobs.posted_at DESC
-LIMIT $4 OFFSET $5;
-`;
+LIMIT $6 OFFSET $7;`;

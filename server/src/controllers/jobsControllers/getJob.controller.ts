@@ -15,6 +15,7 @@ export const getJobController = async (req: Request, res: Response) => {
     if (error.message === "Job not found") {
       return res.status(404).json({ error: error.message });
     }
+    console.log(error);
     res.status(500).json({ error: "Failed to fetch job" });
   }
 };
